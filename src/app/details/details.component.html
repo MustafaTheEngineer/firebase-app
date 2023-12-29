@@ -1,0 +1,34 @@
+<app-header></app-header>
+
+<div class="content" *ngFor="let item of tarif$ | async;">
+  <ion-card>
+    <ion-card-header >
+      <ion-card-title>
+        {{ item.tarif_ismi }}
+      </ion-card-title>
+      <ion-card-subtitle> Hazırlama süresi: {{ item.hazirlama_zamani }} Dk </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <div class="malzemeler">
+    <h2> Malzemeler</h2>
+    <ul>
+      <li *ngFor="let val of item.malzemeler">
+        {{val}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="aciklama">
+    <h2>Açıklama</h2>
+    <p>
+      {{item.tarif_aciklamasi}}
+    </p>
+  </div>
+</div>
+
+<div class="edit">
+  <ion-button (click)="duzenle(kategori_sira,index)">Düzenle</ion-button>
+</div>
+
+<app-tabs></app-tabs>

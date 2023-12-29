@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<ion-list>
+  <ion-item>
+    <ion-select
+      aria-label="fruit"
+      placeholder="Kategori Seç"
+      id="ebeveyn_kategori"
+      [(ngModel)]="kategoriId"
+    >
+      <ion-select-option
+        *ngFor="let kategori of kategori_keys | async"
+        [value]="kategori.id"
+      >
+        {{ kategori.kategori_ismi }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+
+<form [formGroup]="tarifForm" (ngSubmit)="onSubmit()">
+  <span *ngFor="let vee of tarif$ | async">
+    <label for="tarif_ismi">Tarif İsmi:</label>
+    <input type="text" id="tarif_ismi" formControlName="tarif_ismi" />
+
+    <label for="malzemeler">Malzemeler:</label>
+    <input type="text" id="malzemeler" formArrayName="malzemeler" />
+    <button type="button" (click)="malzemeEkle()">Ekle</button>
+
+    <label for="tarif_aciklamasi">Tarif Açıklaması:</label>
+    <textarea id="tarif_aciklamasi" formControlName="tarif_aciklamasi">{{
+      vee.tarif_aciklamasi
+    }}</textarea>
+
+    <label for="hazirlama_zamani">Hazırlama Zamanı:</label>
+    <input
+      type="number"
+      id="hazirlama_zamani"
+      formControlName="hazirlama_zamani"
+    />
+  </span>
+  <button type="submit">Kaydet</button>
+</form>
+
+<app-tabs></app-tabs>

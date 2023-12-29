@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<form [formGroup]="kategoriForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="kategori_ismi">Kategori İsmi:</label>
+    <input type="text" id="kategori_ismi" formControlName="kategori_ismi" />
+  </div>
+  <div>
+    <label for="ebeveyn_kategori">Ebeveyn Kategori:</label>
+    <ion-list>
+      <ion-item>
+        <ion-select 
+          aria-label="fruit"
+          placeholder="Select fruit"
+          id="ebeveyn_kategori"
+          formControlName="ebeveyn_kategori"
+        >
+          <ion-select-option
+            *ngFor="let kategori of kategoriler$ | async"
+            [value]="kategori.id"
+          >
+            {{ kategori.kategori_ismi }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Add more form controls for tarifler if needed -->
+
+  <button type="submit">Submit</button>
+</form>
+<app-tabs></app-tabs>

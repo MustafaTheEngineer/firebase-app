@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let kategori of kategoriler$ | async; index as i">
+    <ion-card-header>
+      <ion-card-title>{{kategori.kategori_ismi}}</ion-card-title>
+    </ion-card-header>
+    <ion-list *ngFor="let tarif of tarifler$ |async; index as j">
+      <span *ngIf="tarif.kategori_sira == i">
+        <span
+          *ngFor="let item of tarif.tarifler; index as k"
+          (click)="detaylar(tarif.kategori_sira,k)"
+        >
+          <ion-item *ngIf="item.tarif_ismi">
+            <ion-label>{{ item.tarif_ismi }} </ion-label>
+          </ion-item>
+        </span>
+      </span>
+    </ion-list>
+  </ion-card>
+</ion-content>
+
+<ion-fab
+  slot="fixed"
+  vertical="bottom"
+  horizontal="end"
+  [edge]="true"
+  routerLink="add"
+>
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<app-tabs></app-tabs>
